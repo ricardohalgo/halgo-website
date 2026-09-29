@@ -94,12 +94,6 @@
     height:100%;
     object-fit:cover;
     object-position:38% 45%;
-    opacity:0;
-    transition:opacity 1.4s ease;
-  }
-  .hero-slide.is-active{ opacity:1; }
-  @media (prefers-reduced-motion: reduce){
-    .hero-slide{ transition:none; }
   }
   .hero::after{
     content:"";
@@ -202,7 +196,6 @@
 </header>
 
 <div class="hero">
-  <img class="hero-slide is-active" src="hero-1.png" alt="An athlete training on a coastal road at sunrise">
   <img class="hero-slide" src="hero-2.png" alt="An athlete training on a coastal road at sunrise">
   <div class="hero-content">
     <div class="wrap">
@@ -221,19 +214,4 @@
     </div>
   </div>
 </div>
-
-<script>
-  (function(){
-    var slides = document.querySelectorAll('.hero-slide');
-    if (slides.length < 2) return;
-    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
-    var i = 0;
-    setInterval(function(){
-      slides[i].classList.remove('is-active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('is-active');
-    }, 10000);
-  })();
-</script>
 
