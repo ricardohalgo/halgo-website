@@ -84,6 +84,12 @@
     object-fit:cover;
     object-position:50% 58%;
   }
+  @media (max-width:900px){
+    .hero-slide{ object-position:42% 50%; }
+  }
+  @media (max-width:560px){
+    .hero-slide{ object-position:38% 42%; }
+  }
   .hero::after{
     content:"";
     position:absolute;
@@ -186,8 +192,8 @@
     <div class="wordmark">
       <svg width="44" height="44" viewBox="0 0 96 96" aria-hidden="true">
         <path d="M 16 68 Q 30 30 48 46 T 82 24" fill="none" stroke="#f3f1ec" stroke-width="6" stroke-linecap="round"/>
-        <circle cx="16" cy="68" r="7" fill="#3a4250"/>
-        <circle cx="48" cy="46" r="7" fill="#3a4250"/>
+        <circle cx="16" cy="68" r="7" fill="#3a4250" stroke="#f3f1ec" stroke-width="2.5"/>
+        <circle cx="48" cy="46" r="7" fill="#3a4250" stroke="#f3f1ec" stroke-width="2.5"/>
         <circle cx="82" cy="24" r="10" fill="#e8792b"/>
       </svg>
       halgo
