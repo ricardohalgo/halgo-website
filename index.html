@@ -170,6 +170,11 @@
     font-size:0.85rem;
     color:var(--text-faint);
   }
+  .foot-link{
+    color:var(--text-dim);
+    text-decoration:none;
+  }
+  .foot-link:hover{ color:var(--text); text-decoration:underline; }
 
   /* ---------- closing mark ---------- */
   .close-mark{
@@ -213,10 +218,10 @@
   </div>
   <div class="close-mark">
     <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; width:100%; flex-wrap:wrap; gap:12px;">
-      <span>&copy; 2026 halgo</span>
+      <span>&copy; 2026 halgo &middot; <a class="foot-link" href="/privacy.html">Privacy</a></span>
       <div class="hero-cta">
         <a class="btn" href="mailto:info@halgo.ch">Get in touch</a>
-        <span class="cta-note">No sign-up — halgo isn't open to users yet.</span>
+        <span class="cta-note">Private testing with a small group of invited users.</span>
       </div>
     </div>
   </div>
