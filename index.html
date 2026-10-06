@@ -91,13 +91,13 @@
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:50% 58%;
+    object-position:50% 0%;   /* the top of the photo is never cropped (Ricardo, 6 Oct) */
   }
   @media (max-width:900px){
-    .hero-slide{ object-position:42% 50%; }
+    .hero-slide{ object-position:42% 0%; }
   }
   @media (max-width:560px){
-    .hero-slide{ object-position:38% 42%; }
+    .hero-slide{ object-position:38% 0%; }
   }
   .hero::after{
     content:"";
