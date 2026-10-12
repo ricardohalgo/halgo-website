@@ -3,136 +3,219 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy · halgo</title>
-<meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Privacy at a glance · halgo</title>
+<meta name="description" content="How halgo looks after your training and health data, in short.">
 <style>
+  /* Same fonts, colours and photo as the home page, all served from this site: no outside requests, no cookies. */
+  @font-face{ font-family:"Fraunces"; font-style:normal; font-weight:400 600; font-display:swap;
+    src:url("fonts/fraunces-latin-opsz-wght.woff2") format("woff2"); }
+  @font-face{ font-family:"IBM Plex Sans"; font-style:normal; font-weight:400 600; font-display:swap;
+    src:url("fonts/ibm-plex-sans-latin-wght.woff2") format("woff2"); }
+  @font-face{ font-family:"IBM Plex Mono"; font-style:normal; font-weight:400; font-display:swap;
+    src:url("fonts/ibm-plex-mono-latin-400.woff2") format("woff2"); }
+  @font-face{ font-family:"IBM Plex Mono"; font-style:normal; font-weight:500; font-display:swap;
+    src:url("fonts/ibm-plex-mono-latin-500.woff2") format("woff2"); }
   :root{
-    --bg:#0b0e12; --panel:#12161c; --line:#232a35;
+    --bg:#0b0e12; --panel:#12161c; --panel-2:#161b22; --line:#232a35;
     --text:#f3f1ec; --text-dim:#a7adb8; --text-faint:#6c7280;
-    --accent:#e8792b; --accent-dim:#c96a26;
+    --accent:#e8792b; --accent-dim:#c96a26; --warm:#f0c8a6;
     color-scheme: dark;
   }
-  *{box-sizing:border-box;}
+  *{ box-sizing:border-box; }
   html{ background:var(--bg); }
   body{
     margin:0; background:var(--bg); color:var(--text);
     font-family:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-    -webkit-font-smoothing:antialiased;
-    line-height:1.65;
+    -webkit-font-smoothing:antialiased; line-height:1.6;
   }
   ::selection{ background:var(--accent); color:#0b0e12; }
   a{ color:inherit; }
+  .wrap{ max-width:1100px; margin:0 auto; padding-inline:24px; }
+  .narrow{ max-width:760px; }
 
-  .wrap{ max-width:720px; margin:0 auto; padding-inline:24px; }
-
-  header.bar{ padding-block:26px 8px; }
-  .bar-inner{
-    max-width:720px; margin:0 auto; padding-inline:24px;
-    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  /* ---------- hero: the home page's photo, top never cropped ---------- */
+  .hero{ position:relative; overflow:hidden; min-height:min(64svh, 560px); display:flex; flex-direction:column; }
+  .hero img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 0%; }
+  @media (max-width:900px){ .hero img{ object-position:42% 0%; } }
+  @media (max-width:560px){ .hero img{ object-position:38% 0%; } }
+  .hero::after{
+    content:""; position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(9,11,14,0.55) 0%, rgba(9,11,14,0.35) 40%, rgba(11,14,18,0.92) 82%, var(--bg) 100%),
+      linear-gradient(90deg, rgba(8,9,11,0.55) 0%, rgba(8,9,11,0.10) 55%);
   }
+  header.bar{ position:relative; z-index:2; padding-block:22px 0; }
   .wordmark{
-    font-family:"Fraunces", serif; font-weight:600; font-size:2rem;
-    letter-spacing:0.01em; display:flex; align-items:center; gap:6px;
-    text-decoration:none; color:var(--text);
+    font-family:"Fraunces", serif; font-weight:600; font-size:2.4rem; letter-spacing:0.01em;
+    display:inline-flex; align-items:center; gap:7px; text-decoration:none;
   }
-  .wordmark svg{ display:block; flex-shrink:0; }
-
-  main{ padding-block:36px 72px; }
-
+  .wordmark svg{ flex-shrink:0; display:block; }
+  .hero-text{ position:relative; z-index:2; margin-top:auto; padding-block:72px 40px; }
   .eyebrow{
-    font-family:"IBM Plex Mono", monospace; font-size:0.78rem;
-    letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin:0 0 14px;
+    font-family:"IBM Plex Mono", monospace; font-size:0.78rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--warm); margin:0 0 16px;
   }
   h1{
-    font-family:"Fraunces", serif; font-weight:500;
-    font-size:clamp(1.8rem, 4.5vw, 2.5rem); line-height:1.1;
-    letter-spacing:-0.01em; margin:0 0 10px; text-wrap:balance;
+    font-family:"Fraunces", serif; font-weight:500; font-size:clamp(2rem, 5vw, 3.4rem);
+    line-height:1.04; letter-spacing:-0.01em; margin:0 0 18px; max-width:18ch; text-wrap:balance;
   }
-  .version{
-    font-family:"IBM Plex Mono", monospace; font-size:0.82rem;
-    color:var(--text-faint); margin:0 0 28px;
-  }
-  .callout{
-    background:var(--panel); border:1px solid var(--line);
-    border-left:3px solid var(--accent); border-radius:3px;
-    padding:16px 20px; margin:0 0 36px; color:var(--text-dim);
-    font-size:0.97rem;
-  }
+  .lead{ font-size:clamp(1.02rem, 1.6vw, 1.18rem); color:var(--text-dim); margin:0; max-width:56ch; }
+  .lead strong{ color:var(--text); font-weight:500; }
+
+  /* ---------- sections ---------- */
+  main{ padding-block:24px 72px; }
+  section{ padding-block:40px; }
   h2{
-    font-family:"Fraunces", serif; font-weight:500; font-size:1.25rem;
-    line-height:1.25; margin:34px 0 8px; color:var(--text);
+    font-family:"IBM Plex Mono", monospace; font-weight:500; font-size:0.8rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--text-faint); margin:0 0 20px;
   }
-  p{ margin:0 0 14px; color:var(--text-dim); }
-  strong{ color:var(--text); font-weight:600; }
-  ul{ margin:0 0 14px; padding-left:1.2em; color:var(--text-dim); }
-  li{ margin-bottom:8px; }
-  li::marker{ color:var(--accent); }
-  code{ font-family:"IBM Plex Mono", monospace; font-size:0.88em; color:var(--text); background:var(--panel); padding:1px 5px; border-radius:3px; }
+  .cards{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }
+  @media (max-width:720px){ .cards{ grid-template-columns:1fr; } }
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:24px 24px 22px;
+  }
+  .card .dot{ display:block; width:10px; height:10px; border-radius:50%; background:var(--accent); margin-bottom:16px; }
+  .card h3{ font-family:"Fraunces", serif; font-weight:500; font-size:1.35rem; line-height:1.2; margin:0 0 8px; }
+  .card p{ margin:0; color:var(--text-dim); }
+
+  .nots{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px 32px; }
+  @media (max-width:720px){ .nots{ grid-template-columns:1fr; } }
+  .nots li{ padding-left:26px; position:relative; color:var(--text-dim); }
+  .nots li::before{
+    content:""; position:absolute; left:0; top:0.55em; width:11px; height:11px; border-radius:50%;
+    border:1.5px solid var(--text-faint);
+  }
+  .nots strong{ color:var(--text); font-weight:500; display:block; }
+
+  .honest{
+    background:var(--panel-2); border:1px solid var(--line); border-left:3px solid var(--accent);
+    border-radius:4px; padding:28px 28px 26px;
+  }
+  .honest h2{ color:var(--warm); }
+  .honest p{ margin:0 0 12px; color:var(--text-dim); max-width:64ch; }
+  .honest p:last-child{ margin-bottom:0; }
+  .honest strong{ color:var(--text); font-weight:500; }
+
+  .cta{
+    border-top:1px solid var(--line); margin-top:16px; padding-top:40px;
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .cta h2{ margin-bottom:8px; }
+  .cta p{ margin:0; color:var(--text-dim); max-width:48ch; }
+  .cta-actions{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; background:var(--accent); color:#0b0e12;
+    font-weight:600; font-size:0.95rem; padding:13px 22px; border-radius:3px; text-decoration:none;
+  }
+  .btn:hover{ background:var(--accent-dim); }
+  .cta-note{ font-size:0.85rem; color:var(--text-faint); }
+  .btn:focus-visible, .foot-link:focus-visible, .wordmark:focus-visible{ outline:2px solid var(--text); outline-offset:3px; }
 
   footer{
-    border-top:1px solid var(--line); padding-block:24px;
-    font-family:"IBM Plex Mono", monospace; font-size:0.75rem;
-    letter-spacing:0.04em; color:var(--text-faint);
+    border-top:1px solid rgba(255,255,255,0.08); padding-block:22px;
+    font-family:"IBM Plex Mono", monospace; font-size:0.75rem; letter-spacing:0.04em; color:var(--text-faint);
   }
   footer .wrap{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
-  footer a{ color:var(--text-dim); text-decoration:none; }
-  footer a:hover{ color:var(--text); text-decoration:underline; }
+  footer p{ margin:0; }
+  .foot-link{ color:var(--text-dim); text-decoration:none; }
+  .foot-link:hover{ color:var(--text); text-decoration:underline; }
 </style>
 </head>
 <body>
 
-<header class="bar">
-  <div class="bar-inner">
-    <a class="wordmark" href="/" aria-label="halgo home">
-      <svg width="44" height="44" viewBox="0 0 96 96" aria-hidden="true">
-        <path d="M 16 68 Q 30 30 48 46 T 82 24" fill="none" stroke="#f3f1ec" stroke-width="6" stroke-linecap="round"/>
-        <circle cx="16" cy="68" r="8" fill="#3a4250" stroke="#f3f1ec" stroke-width="2.5"/>
-        <circle cx="48" cy="46" r="8" fill="#3a4250" stroke="#f3f1ec" stroke-width="2.5"/>
-        <circle cx="82" cy="24" r="8" fill="#e8792b" stroke="#f3f1ec" stroke-width="2.5"/>
-      </svg>
-      halgo
-    </a>
+<div class="hero">
+  <img src="hero-3.png" alt="" aria-hidden="true">
+  <header class="bar">
+    <div class="wrap">
+      <a class="wordmark" href="/" aria-label="halgo, home">
+        <svg width="40" height="40" viewBox="0 0 96 96" aria-hidden="true">
+          <path d="M 16 68 Q 30 30 48 46 T 82 24" fill="none" stroke="#f3f1ec" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="16" cy="68" r="8" fill="#3a4250" stroke="#f3f1ec" stroke-width="2.5"/>
+          <circle cx="48" cy="46" r="8" fill="#3a4250" stroke="#f3f1ec" stroke-width="2.5"/>
+          <circle cx="82" cy="24" r="8" fill="#e8792b" stroke="#f3f1ec" stroke-width="2.5"/>
+        </svg>
+        halgo
+      </a>
+    </div>
+  </header>
+  <div class="hero-text">
+    <div class="wrap">
+      <p class="eyebrow">Privacy at a glance</p>
+      <h1>Private, and honest about the limits.</h1>
+      <p class="lead">Your training and health data tell your story, and we treat them that way. halgo is free and in a test phase: <strong>for now it's by invitation only</strong>, and we invite a small number of people. It's run by Ricardo Covas as a private individual, who is responsible for your data. Here's how we look after it.</p>
+    </div>
   </div>
-</header>
+</div>
 
 <main>
+  <section>
+    <div class="wrap">
+      <h2>What we do</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="dot" aria-hidden="true"></span>
+          <h3>In the EU, encrypted</h3>
+          <p>Your data lives on a server in Nuremberg, Germany, on an encrypted disk. The backups are encrypted too.</p>
+        </div>
+        <div class="card">
+          <span class="dot" aria-hidden="true"></span>
+          <h3>Kept apart</h3>
+          <p>Your data is kept in its own separate store: no one else using halgo can see it.</p>
+        </div>
+        <div class="card">
+          <span class="dot" aria-hidden="true"></span>
+          <h3>Only what you choose</h3>
+          <p>halgo takes in only what you connect, upload or enter yourself, and only after you've said yes, in its own box, to it handling your health data.</p>
+        </div>
+        <div class="card">
+          <span class="dot" aria-hidden="true"></span>
+          <h3>Yours to take, or to delete</h3>
+          <p>Download all your health and training data, start afresh, or delete your account, whenever you like. Deleting can't be undone: your data is gone for good, and your health data leaves our encrypted backups within 7 days. You can also withdraw your consent, or object to how your data is used, at any time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>What we don't do</h2>
+      <ul class="nots">
+        <li><strong>Never sold.</strong> We never sell your data, and never give it to anyone to use for their own purposes. The companies that host halgo and send its emails handle it only on our instructions.</li>
+        <li><strong>No ads, no tracking.</strong> No advertising, and no analytics or tracking cookies.</li>
+        <li><strong>No AI model in halgo.</strong> No AI model is used in halgo today, and your data is never used to train one.</li>
+        <li><strong>No medical advice.</strong> halgo describes your own data: it's not medical advice, not a diagnosis and not a training plan.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap narrow">
+      <div class="honest">
+        <h2>The honest part</h2>
+        <p>The encryption protects your data if the disk is reused, lost or copied. It doesn't protect against someone who takes over the running server, and it doesn't stop Ricardo, who runs the server: <strong>he could technically access your data.</strong></p>
+        <p>He doesn't look at anyone's data unless you ask us for help, or to fix a fault halgo's nightly check finds in it (that reading isn't recorded). Otherwise, halgo's own tools record each time he opens someone's data, and why. The full notice says plainly what that record can and can't guarantee.</p>
+      </div>
+    </div>
+  </section>
+
   <div class="wrap">
-<article lang="en">
-<p class="eyebrow">Private test · invited users only</p>
-<h1>halgo — Privacy Notice for Private Testing</h1>
-<p class="version">Version 1, 3 October 2026</p>
-<p class="callout">This is the privacy notice for halgo's private test, open to invited people only. It is not the full privacy policy: that will replace it before halgo opens more widely.</p>
-<h2>Who runs halgo</h2>
-<p>Ricardo Covas, personally — there is no company yet. Contact: <strong>info@halgo.ch</strong>. halgo is invite-only: you're reading this because you were personally invited.</p>
-<h2>What halgo is</h2>
-<p>A free website, <strong>app.halgo.ch</strong>, that analyses your own training and health data. It's online only — there is no app to install.</p>
-<h2>Where your data lives</h2>
-<p>On a server at Hetzner, in Nuremberg, Germany (EU). Your data is kept in its own separate store: no other tester can see it, and you can't see theirs. Backups are encrypted and also kept at Hetzner, in the same region, rotated for up to 6 months.</p>
-<h2>Being straightforward about today's limits</h2>
-<p>The server's disk is not encrypted yet. That means Ricardo, who runs the server, could technically access your data. The goal is for that to stop being possible. Until then, he does not look at anyone's data unless you ask him for help with something — and every time he does, it's recorded.</p>
-<h2>What comes in — only what you choose to connect or upload</h2>
-<ul><li>Apple Health data: either an export you upload yourself, or data sent daily by the Health Auto Export app.</li><li>Workout files you upload: FIT, GPX, TCX, or a Garmin or Strava archive.</li><li>If you connect Polar: your workouts, sleep, Nightly Recharge, heart rate, and Cardio Load. ("Polar Ecosystem" is credited as the source wherever this data is shown, as Polar's licence requires.)</li><li>COROS will work the same way once it's added, under the same rules.</li></ul>
-<h2>What halgo does with your data</h2>
-<p>Shows you your own analysis — nothing more. It is never sold, never shared, and there is no advertising. It is never used to train any AI model. No AI model is used in halgo today. Everything halgo shows you is fitness and training guidance, not medical advice.</p>
-<h2>Other services involved</h2>
-<p>Sign-in and notice emails are sent through Scaleway, based in France (EU). When a route map is shown, it loads map tiles from OpenStreetMap — on by default, and you can turn it off in Settings. That only reveals the map area being viewed, not who you are. halgo uses only cookies it needs to work: one keeps you signed in, and two short-lived ones are used only while you sign in. There are no analytics or tracking cookies.</p>
-<h2>What's kept about sign-ins</h2>
-<p>Sign-in records: 90 days. Ended sessions: 30 days. Technical logs, which never contain health data: 14 days.</p>
-<h2>How you sign in</h2>
-<p>There are no passwords. You sign in with a passkey, or with a one-time link sent to your email. The link works once and expires after 15 minutes. You stay signed in for up to 30 days, and you're signed out sooner after 12 hours of inactivity. Before you download your data, delete your account or change how you sign in, halgo asks you to confirm it's you. halgo emails you when a new passkey is added, when your account is signed in on a new device, and when your email changes. Connections to halgo are encrypted (HTTPS).</p>
-<h2>Your rights, any time</h2>
-<ul><li>Disconnect Polar (or any other connection) — its data is deleted.</li><li>Download all of your data from the app.</li><li>Delete your account yourself — this removes your data immediately, and from the backups within 7 days.</li><li>Or just ask Ricardo (<strong>info@halgo.ch</strong>) to do any of the above for you.</li></ul>
-</article>
+    <div class="cta">
+      <div>
+        <h2>Every detail</h2>
+        <p>How long we keep things, what's kept about sign-ins, every company involved, and all your rights: it's all in the full notice.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn" href="https://app.halgo.ch/privacy">Read the full privacy notice</a>
+        <span class="cta-note">Questions? <a class="foot-link" href="mailto:info@halgo.ch">info@halgo.ch</a></span>
+      </div>
+    </div>
   </div>
 </main>
 
 <footer>
   <div class="wrap">
-    <span>&copy; 2026 halgo</span>
-    <a href="/">halgo.ch</a>
+    <p>This page is hosted by GitHub, which, like any web host, sees your IP address. It sets no cookies.</p>
+    <p>&copy; 2026 halgo &middot; <a class="foot-link" href="/">Home</a></p>
   </div>
 </footer>
 
